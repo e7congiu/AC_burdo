@@ -75,6 +75,7 @@ enum
     S_GROTTO3,
     S_MOANING1,
     S_MOANING2,
+    S_DBZ,
 // end: voicecoms
     S_ITEMHELMET, // begin: Sounds for AssaultCube v1.1.0.4 onwards
     S_HEARTBEAT,

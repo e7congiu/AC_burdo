@@ -255,10 +255,11 @@ public:
     int primary, nextprimary;
     int gunselect;
     bool akimbo;
+    bool dbz;
     int ammo[NUMGUNS], mag[NUMGUNS], gunwait[NUMGUNS];
     int pstatshots[NUMGUNS], pstatdamage[NUMGUNS];
 
-    playerstate() : armour(0), primary(GUN_ASSAULT), nextprimary(GUN_ASSAULT), akimbo(false) {}
+    playerstate() : armour(0), primary(GUN_ASSAULT), nextprimary(GUN_ASSAULT), akimbo(false), dbz(false) {}
     virtual ~playerstate() {}
 
     void resetstats() { loopi(NUMGUNS) pstatshots[i] = pstatdamage[i] = 0; }
@@ -311,7 +312,11 @@ public:
                 break;
             case I_AMMO: additem(ammostats[primary], ammo[primary]); break;
             case I_GRENADE: additem(ammostats[GUN_GRENADE], mag[GUN_GRENADE]); break;
-            case I_HEALTH: additem(powerupstats[type-I_HEALTH], health); break;
+            case I_HEALTH:
+                {
+                additem(powerupstats[type-I_HEALTH], health);
+                break;
+                }
             case I_HELMET:
             case I_ARMOUR:
                 additem(powerupstats[type-I_HEALTH], armour); break;
@@ -326,6 +331,7 @@ public:
     void respawn()
     {
         health = 100;
+        dbz = false;
         armour = 0;
         gunselect = GUN_PISTOL;
         akimbo = false;
@@ -399,6 +405,7 @@ public:
         damage -= rd;
 
         health -= damage;
+
         return damage;
     }
 };

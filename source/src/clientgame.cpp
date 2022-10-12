@@ -693,6 +693,21 @@ void updateworld(int curtime, int lastmillis)        // main game update loop
 
     movelocalplayer();
     c2sinfo(player1);   // do this last, to reduce the effective frame lag
+
+    ///@test
+
+    if(player1->health <= 30 && player1->health > 0 && player1->dbz==false)
+        {
+        player1->dbz=true;
+        audiomgr.playsound(S_GROTTO1,SP_HIGH);
+        hudoutf("\f2%s in deep shit%s", colorname(player1), "");
+        }
+    if(player1->health <= 0 && player1->dbz==true)
+        {
+        player1->dbz=false;
+        hudoutf("WASTED");
+        //audiomgr.stopsound();
+        }
 }
 
 #define SECURESPAWNDIST 15

@@ -50,6 +50,7 @@ then
 fi
 
 BINARYPATH="${CUBE_DIR}/bin_unix/${SYSTEM_NAME}${MACHINE_NAME}client"
+BINARYPATH="${CUBE_DIRE}/bin_unix/gino_client"
 
 if [ "$1" = "--outputbinarypath" ]; then
   echo "${BINARYPATH}"

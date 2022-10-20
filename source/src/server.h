@@ -548,7 +548,7 @@ const char *rolenames[CR_NUM + 1] = { "unarmed", "master", "admin", "owner", "" 
 
 const char *killmessages[2][NUMGUNS] =
 {
-    { "",        "busted", "picked off", "peppered",   "sprayed", "punctured", "shredded", "",       "busted" },
+    { "",        "busted", "picked off", "peppered",   "sprayed", "piselled", "shredded", "",       "busted" },
     { "slashed", "",       "",           "splattered", "",        "headshot",  "",         "gibbed", ""       }
 };
 
@@ -662,6 +662,7 @@ soundcfgitem soundcfg[S_NULL] =
     { "voicecom/fart_1", "Fart",                  0, 0,  0, S_GROTTO3,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/moaning_1", "Eeeye",                  0, 0,  0, S_MOANING1,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/moaning_2", "Ti sborro negli occhi",                  0, 0,  0, S_MOANING2,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
+    { "misc/alarm_l", "Duduuun",                  0, 0,  0, S_AOE,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "misc/dbz", "DBZ",                  0, 0,  0, S_DBZ,          C(OTHER)                       }, // 101
     { "misc/pickup_helmet",     "Helmet pickup",            0, 0,  0, S_ITEMHELMET,             C(PICKUP)        }, // 99
     { "player/heartbeat",       "Heartbeat",                0, 0,  0, S_HEARTBEAT,              C(OWNPAIN)       }, // 100

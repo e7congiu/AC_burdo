@@ -699,8 +699,8 @@ void updateworld(int curtime, int lastmillis)        // main game update loop
     if(player1->health <= 30 && player1->health > 0 && player1->dbz==false)
         {
         player1->dbz=true;
-        audiomgr.playsound(S_GROTTO1,SP_HIGH);
-        hudoutf("\f2%s in deep shit%s", colorname(player1), "");
+        audiomgr.playsound(S_AOE,SP_HIGH);
+        //hudoutf("\f2%s in deep shit%s", colorname(player1), "");
         }
     if(player1->health <= 0 && player1->dbz==true)
         {

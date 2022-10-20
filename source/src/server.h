@@ -663,7 +663,6 @@ soundcfgitem soundcfg[S_NULL] =
     { "voicecom/moaning_1", "Eeeye",                  0, 0,  0, S_MOANING1,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/moaning_2", "Ti sborro negli occhi",                  0, 0,  0, S_MOANING2,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "misc/alarm_l", "Duduuun",                  0, 0,  0, S_AOE,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
-    { "misc/dbz", "DBZ",                  0, 0,  0, S_DBZ,          C(OTHER)                       }, // 101
     { "misc/pickup_helmet",     "Helmet pickup",            0, 0,  0, S_ITEMHELMET,             C(PICKUP)        }, // 99
     { "player/heartbeat",       "Heartbeat",                0, 0,  0, S_HEARTBEAT,              C(OWNPAIN)       }, // 100
     { "ktf/flagscore",          "KTF score",                0, 0,  0, S_KTFSCORE,               C(OTHER)         }, // 101

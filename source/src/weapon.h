@@ -183,3 +183,17 @@ struct knife : weapon
     int flashtime() const;
 };
 
+struct hammer : weapon
+{
+    hammer(playerent *owner);
+
+    bool attack(vec &targ);
+    int modelanim();
+
+    void drawstats();
+    void attackfx(const vec &from, const vec &to, int millis);
+    void renderstats();
+
+    int flashtime() const;
+};
+

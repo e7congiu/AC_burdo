@@ -503,6 +503,7 @@ uchar entscale[MAXENTTYPES][7] =
 itemstat ammostats[NUMGUNS] =
 {
     {  1,  1,   1,  S_ITEMAMMO  },   // knife dummy
+    {  1,  1,   1,  S_ITEMAMMO  },   // hammer dummy
     { 20, 60, 100,  S_ITEMAMMO  },   // pistol
     { 15, 30,  30,  S_ITEMAMMO  },   // carbine
     { 14, 28,  21,  S_ITEMAMMO  },   // shotgun
@@ -529,13 +530,14 @@ guninfo guns[NUMGUNS] =
     //modelname                 sound                reloadtime        damage    projspeed  spread     magsize    mKB      reB          reF        isauto
     //             title                      reload       attackdelay      piercing     part     recoil       mKR     reI        reM        pFX
     { "knife",   "Knife",        S_KNIFE,   S_NULL,     0,      500,    50, 100,     0,   0,  1,    1,   1,    0,  0,   0,   0,    0,    0,   1,   false },
-    { "pistol",  "Pistol",       S_PISTOL,  S_RPISTOL,  1400,   160,    18,   0,     0,   0, 53,   10,   10,   6,  5,   6,  35,   58,   125,  1,   false },
-    { "carbine", "TMP-M&A CB",   S_CARBINE, S_RCARBINE, 1800,   720,    60,  40,     0,   0, 10,   60,   10,   4,  4,  10,  60,   60,   150,  1,   false },
-    { "shotgun", "V-19 CS",      S_SHOTGUN, S_RSHOTGUN, 2400,   880,    1,    0,     0,   0,  1,   35,    7,   9,  9,  10, 140,  140,   125,  1,   false },   // CAUTION dmg only sane for server!
-    { "subgun",  "A-ARD/10 SMG", S_SUBGUN,  S_RSUBGUN,  1650,   80,     16,   0,     0,   0, 45,   15,   30,   1,  2,   5,  25,   50,   188,  1,   true  },
-    { "sniper",  "AD-81 SR",     S_SNIPER,  S_RSNIPER,  1950,   1500,   82,  25,     0,   0, 50,   50,    5,   4,  4,  10,  85,   85,   100,  1,   false },
-    { "assault", "MTP-57 AR",    S_ASSAULT, S_RASSAULT, 2000,   120,    22,   0,     0,   0, 18,   30,   20,   0,  2,   3,  25,   50,   115,  1,   true  },
-    { "grenade", "Grenades",     S_NULL,    S_NULL,     1000,   650,    200,  0,    20,   6,  1,    1,   1,    3,  1,   0,   0,    0,    0,   3,   false },
+    { "gabibber","Gabibbatore", S_SPLASHGABIBBO,   S_NULL,     0,      500,    200, 100,     0,   0,  1,    1,   1,    0,  0,   0,   0,    0,    0,   1,   false }, //S_SPLASHGABIBBO
+    { "pistol",  "Pistoletta",       S_PISTOL,  S_RPISTOL,  1400,   160,    18,   0,     0,   0, 53,   10,   10,   6,  5,   6,  35,   58,   125,  1,   false },
+    { "carbine", "Carabina",   S_CARBINE, S_RCARBINE, 1800,   720,    60,  40,     0,   0, 10,   60,   10,   4,  4,  10,  60,   60,   150,  1,   false },
+    { "shotgun", "Fucilozzo",      S_SHOTGUN, S_RSHOTGUN, 2400,   880,    1,    0,     0,   0,  1,   35,    7,   9,  9,  10, 140,  140,   125,  1,   false },   // CAUTION dmg only sane for server!
+    { "subgun",  "Mitraglietta", S_SUBGUN,  S_RSUBGUN,  1650,   80,     16,   0,     0,   0, 45,   15,   30,   1,  2,   5,  25,   50,   188,  1,   true  },
+    { "sniper",  "Pisellatore",     S_SNIPER,  S_RSNIPER,  1950,   1500,   82,  25,     0,   0, 50,   50,    5,   4,  4,  10,  85,   85,   100,  1,   false },
+    { "assault", "M4",    S_ASSAULT, S_RASSAULT, 2000,   120,    22,   0,     0,   0, 18,   30,   20,   0,  2,   3,  25,   50,   115,  1,   true  },
+    { "grenade", "Granatone",     S_NULL,    S_NULL,     1000,   650,    200,  0,    20,   6,  1,    1,   1,    3,  1,   0,   0,    0,    0,   3,   false },
     { "pistol",  "Akimbo",       S_PISTOL,  S_RAKIMBO,  1400,   80,     18,   0,     0,   0, 50,   10,   20,   6,  5,   4,  15,   25,   115,  1,   true  },
 };
 
@@ -548,8 +550,8 @@ const char *rolenames[CR_NUM + 1] = { "unarmed", "master", "admin", "owner", "" 
 
 const char *killmessages[2][NUMGUNS] =
 {
-    { "",        "busted", "picked off", "peppered",   "sprayed", "piselled", "shredded", "",       "busted" },
-    { "slashed", "",       "",           "splattered", "",        "headshot",  "",         "gibbed", ""       }
+    { "",        "gabibbed","busted", "picked off", "peppered", "came on", "piselled", "shredded", "",       "busted"},
+    { "slashed", "gabibbed","",       "",           "splattered", "",        "headshot",  "",         "gibbed", "" }
 };
 
 #define C(x) (1<<(SC_##x))
@@ -563,6 +565,7 @@ soundcfgitem soundcfg[S_NULL] =
     { "weapon/ric3",            "Ricochet hit",             0, 0,  0, S_BULLETHIT,              C(BULLET)        }, // 5
     { "weapon/waterimpact",     "Bullet (water impact)",    0, 0,  0, S_BULLETWATERHIT,         C(BULLET)        }, // 6
     { "weapon/knife",           "Knife",                    0, 0,  0, S_KNIFE,                  C(WEAPON)        }, // 7
+    //{ "weapon/hammer",          "Hammer",                    0, 0,  0, S_KNIFE,                  C(WEAPON)        }, // 7
     { "weapon/usp",             "Pistol",                   0, 0,  0, S_PISTOL,                 C(WEAPON)        }, // 8
     { "weapon/pistol_reload",   "Pistol reloading",         0, 0,  0, S_RPISTOL,                C(WEAPON)        }, // 9
     { "weapon/carbine",         "Carbine",                  0, 0,  0, S_CARBINE,                C(WEAPON)        }, // 10
@@ -662,6 +665,8 @@ soundcfgitem soundcfg[S_NULL] =
     { "voicecom/fart_1", "Fart",                  0, 0,  0, S_GROTTO3,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/moaning_1", "Eeeye",                  0, 0,  0, S_MOANING1,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/moaning_2", "Ti sborro negli occhi",                  0, 0,  0, S_MOANING2,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
+    { "voicecom/frigo", "Callona!",                  0, 0,  0, S_FRIGO,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
+    { "voicecom/mammamia", "Mamma mia comme sto!",                  0, 0,  0, S_CINEPANETTONE1,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "misc/alarm_l", "Duduuun",                  0, 0,  0, S_AOE,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "misc/pickup_helmet",     "Helmet pickup",            0, 0,  0, S_ITEMHELMET,             C(PICKUP)        }, // 99
     { "player/heartbeat",       "Heartbeat",                0, 0,  0, S_HEARTBEAT,              C(OWNPAIN)       }, // 100

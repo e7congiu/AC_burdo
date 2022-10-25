@@ -56,9 +56,9 @@ struct entity : persistent_entity
     }
 };
 
-enum { GUN_KNIFE = 0, GUN_PISTOL, GUN_CARBINE, GUN_SHOTGUN, GUN_SUBGUN, GUN_SNIPER, GUN_ASSAULT, GUN_GRENADE, GUN_AKIMBO, NUMGUNS };
+enum { GUN_KNIFE = 0, GUN_HAMMER, GUN_PISTOL, GUN_CARBINE, GUN_SHOTGUN, GUN_SUBGUN, GUN_SNIPER, GUN_ASSAULT, GUN_GRENADE, GUN_AKIMBO, NUMGUNS };
 #define valid_weapon(g) ((g) >= GUN_KNIFE && (g) < NUMGUNS)
-#define reloadable_gun(g) ((g) != GUN_KNIFE && (g) != GUN_GRENADE)
+#define reloadable_gun(g) ((g) != GUN_KNIFE && (g) != GUN_HAMMER && (g) != GUN_GRENADE)
 
 #define SGRAYS 21
 #define SGDMGTOTAL 90
@@ -337,6 +337,7 @@ public:
         akimbo = false;
         loopi(NUMGUNS) ammo[i] = mag[i] = gunwait[i] = 0;
         ammo[GUN_KNIFE] = mag[GUN_KNIFE] = 1;
+        ammo[GUN_HAMMER] = mag[GUN_HAMMER] = 1;
     }
 
     virtual void spawnstate(int gamemode)

@@ -26,6 +26,18 @@ void drawequipicon(float x, float y, int col, int row)
     }
 }
 
+void drawequipicon(float x, float y, const char* texturePath)
+{
+    static Texture *tex = NULL;
+    if(!tex) tex = textureload(texturePath, 3);
+    if(tex)
+    {
+        turn_on_transparency();
+        drawicon(tex, x, y, 120, 0, 0,1);
+        glDisable(GL_BLEND);
+    }
+}
+
 VARP(radarentsize, 4, 12, 64);
 
 void drawradaricon(float x, float y, float s, int col, int row)
@@ -335,16 +347,42 @@ void drawequipicons(playerent *p)
     glColor4f(1.0f, 1.0f, 1.0f, 0.2f+(sinf(lastmillis/100.0f)+1.0f)/2.0f);
 
     // health & armor
-    if(p->armour) drawequipicon(HUDPOS_ARMOUR*2, 1650, (p->armour-1)/25, 2);
+    if(p->armour)
+        drawequipicon(HUDPOS_ARMOUR*2, 1650, (p->armour-1)/25, 2);
     drawequipicon(HUDPOS_HEALTH*2, 1650, 2, 3);
-    if(p->mag[GUN_GRENADE]) drawequipicon(oldfashionedgunstats ? (HUDPOS_GRENADE + (((float)screenw / (float)screenh > 1.5f) ? 75 : 25)) * 2 : HUDPOS_GRENADE*2, 1650, 3, 1);
+    if(p->mag[GUN_GRENADE])
+      {
+      float gunpos = oldfashionedgunstats ? (HUDPOS_GRENADE + (((float)screenw / (float)screenh > 1.5f) ? 75 : 25)) * 2 : HUDPOS_GRENADE*2;
+      drawequipicon(gunpos, 1650, 3, 1);
+      }
 
     // weapons
-    int c = p->weaponsel->type != GUN_GRENADE ? p->weaponsel->type : getprevweaponsel(p), r = 0;
-    if(c==GUN_AKIMBO) c = GUN_PISTOL; // same icon for akimb & pistol
-    if(c>3) { c -= 4; r = 1; }
+    int c = 0;
+    int r = 0;
+    switch(p->weaponsel->type)
+      {
+      case GUN_KNIFE: c=0; r=0; break;
+      case GUN_HAMMER: break;
+      case GUN_PISTOL: c=1; r=0; break;
+      case GUN_CARBINE: c=2; r=0; break;
+      case GUN_SHOTGUN: c=3; r=0; break;
+      case GUN_SUBGUN: c=0; r=1; break;
+      case GUN_SNIPER: c=1; r=1; break;
+      case GUN_ASSAULT: c=2; r=1; break;
+      case GUN_GRENADE: c=3; r=1; break;
+      case GUN_AKIMBO: c=1; r=0; break;
+      default: break;
+      }
 
-    if(p->weaponsel && valid_weapon(p->weaponsel->type)) drawequipicon(HUDPOS_WEAPON*2, 1650, c, r);
+    if(p->weaponsel && valid_weapon(p->weaponsel->type))
+      {
+      if(p->weaponsel->type != GUN_HAMMER)
+        drawequipicon(HUDPOS_WEAPON*2, 1650, c, r);
+      else
+        {
+        drawequipicon(HUDPOS_WEAPON*2, 1650, "packages/misc/gabibber.png");
+        }
+      }
     glEnable(GL_BLEND);
 }
 
@@ -838,7 +876,7 @@ void gl_drawhud(int w, int h, int curfps, int nquads, int curvert, bool underwat
         draw_text(infostr, 48, VIRTH * 2 - 3 * FONTH);
         glPopMatrix();
     }
-    else if(targetplayer && showtargetname) 
+    else if(targetplayer && showtargetname)
     {
         defformatstring(tpinfo)("%s [cn:%d]", colorname(targetplayer), targetplayer->clientnum);
         draw_text(tpinfo, HUDPOS_X_BOTTOMLEFT, HUDPOS_Y_BOTTOMLEFT);

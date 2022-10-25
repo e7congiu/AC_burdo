@@ -42,8 +42,8 @@ void checkweaponswitch()
             keym *key_LMB = keyms.access(-1);
             if(key_LMB->pressed)
             {
-                player1->attacking = true; 
-                player1->weaponsel->attack(worldpos); 
+                player1->attacking = true;
+                player1->weaponsel->attack(worldpos);
             }
         }
     }
@@ -1084,6 +1084,7 @@ void weapon::equipplayer(playerent *pl)
     pl->weapons[GUN_ASSAULT] = new assaultrifle(pl);
     pl->weapons[GUN_GRENADE] = new grenades(pl);
     pl->weapons[GUN_KNIFE] = new knife(pl);
+    pl->weapons[GUN_HAMMER] = new hammer(pl);
     pl->weapons[GUN_PISTOL] = new pistol(pl);
     pl->weapons[GUN_CARBINE] = new carbine(pl);
     pl->weapons[GUN_SHOTGUN] = new shotgun(pl);
@@ -1313,7 +1314,7 @@ void grenades::thrownade()
     const float speed = cosf(RAD*owner->pitch);
     vec lvel(sinf(RAD*owner->yaw)*speed, -cosf(RAD*owner->yaw)*speed, sinf(RAD*owner->pitch));
     lvel.mul(1.5f);
-    vec uvel(int(lvel.x*DNF)/DNF,int(lvel.y*DNF)/DNF,int(lvel.z*DNF)/DNF); // force universal granularity 
+    vec uvel(int(lvel.x*DNF)/DNF,int(lvel.y*DNF)/DNF,int(lvel.z*DNF)/DNF); // force universal granularity
     thrownade(uvel);
 }
 
@@ -1659,6 +1660,56 @@ int knife::modelanim() { return modelattacking() ? ANIM_GUN_SHOOT : ANIM_GUN_IDL
 void knife::drawstats() {}
 void knife::attackfx(const vec &from, const vec &to, int millis) { attacksound(); }
 void knife::renderstats() { }
+
+// hammer
+
+hammer::hammer(playerent *owner) : weapon(owner, GUN_HAMMER) {}
+
+int hammer::flashtime() const { return 0; }
+
+bool hammer::attack(vec &targ)
+{
+    int attackmillis = lastmillis-owner->lastaction - gunwait;
+    if(attackmillis<0) return false;
+    gunwait = reloading = 0;
+
+    if(!owner->attacking) return false;
+
+    attackmillis = lastmillis - min(attackmillis, curtime);
+    updatelastaction(owner, attackmillis);
+
+    owner->lastattackweapon = this;
+    owner->attacking = false;
+
+    vec from = owner->o;
+    vec to = targ;
+    from.z -= weaponbeloweye;
+
+    vec unitv;
+    float dist = to.dist(from, unitv);
+    unitv.div(dist);
+    unitv.mul(3); // punch range
+    to = from;
+    to.add(unitv);
+    intersectgeometry(from,to);
+    if ( owner->pitch < 0 ) to.z += 2.5 * sin( owner->pitch * 0.01745329 );
+
+    attackevent(owner, type);
+
+    hits.setsize(0);
+    raydamage(from, to, owner);
+    attackfx(from, to, 0);
+    sendshoot(from, to, attackmillis);
+    gunwait = info.attackdelay;
+
+    return true;
+}
+
+int hammer::modelanim() { return modelattacking() ? ANIM_GUN_SHOOT : ANIM_GUN_IDLE; }
+
+void hammer::drawstats() {}
+void hammer::attackfx(const vec &from, const vec &to, int millis) { attacksound(); }
+void hammer::renderstats() { }
 
 
 void setscope(bool enable)

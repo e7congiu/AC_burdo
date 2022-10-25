@@ -44,7 +44,7 @@ void processevent(client *c, shotevent &e)
         return;
 
     if(e.gun == GUN_AKIMBO && gs.akimbomillis < sg->gamemillis) return;
-    if(e.gun!=GUN_KNIFE) gs.mag[e.gun]--;
+    if(e.gun!=GUN_KNIFE && e.gun!=GUN_HAMMER) gs.mag[e.gun]--;
     loopi(NUMGUNS) if(gs.gunwait[i]) gs.gunwait[i] = max(gs.gunwait[i] - (e.millis-gs.lastshot), 0);
     gs.lastshot = e.millis;
     gs.gunwait[e.gun] = attackdelay(e.gun);

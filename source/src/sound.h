@@ -78,6 +78,7 @@ enum
     S_AOE,
     S_FRIGO,
     S_CINEPANETTONE1,
+    S_AMIOE,
 // end: voicecoms
     S_ITEMHELMET, // begin: Sounds for AssaultCube v1.1.0.4 onwards
     S_HEARTBEAT,

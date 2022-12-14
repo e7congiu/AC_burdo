@@ -667,6 +667,7 @@ soundcfgitem soundcfg[S_NULL] =
     { "voicecom/moaning_2", "Ti sborro negli occhi",                  0, 0,  0, S_MOANING2,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/frigo", "Callona!",                  0, 0,  0, S_FRIGO,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "voicecom/mamma_mia", "Mamma mia comme sto!",                  0, 0,  0, S_CINEPANETTONE1,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
+    { "voicecom/amioe", "Amioe",    0,  0,  0,  S_AMIOE,    C(VOICECOM)|C(TEAM)|C(PUBLIC)                       },
     { "misc/alarm_l", "Duduuun",                  0, 0,  0, S_AOE,          C(VOICECOM)|C(TEAM)|C(PUBLIC)                       }, // 101
     { "misc/pickup_helmet",     "Helmet pickup",            0, 0,  0, S_ITEMHELMET,             C(PICKUP)        }, // 99
     { "player/heartbeat",       "Heartbeat",                0, 0,  0, S_HEARTBEAT,              C(OWNPAIN)       }, // 100

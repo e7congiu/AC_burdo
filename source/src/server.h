@@ -537,6 +537,7 @@ guninfo guns[NUMGUNS] =
     { "subgun",  "Mitraglietta", S_SUBGUN,  S_RSUBGUN,  1650,   80,     16,   0,     0,   0, 45,   15,   30,   1,  2,   5,  25,   50,   188,  1,   true  },
     { "sniper",  "Pisellatore",     S_SNIPER,  S_RSNIPER,  1950,   1500,   82,  25,     0,   0, 50,   50,    5,   4,  4,  10,  85,   85,   100,  1,   false },
     { "assault", "M4",    S_ASSAULT, S_RASSAULT, 2000,   120,    22,   0,     0,   0, 18,   30,   20,   0,  2,   3,  25,   50,   115,  1,   true  },
+    { "ratzinger",  "Lanciaratzinger",     S_RATZINGER,  S_RRATZINGER,  1950,   1500,   82,  25,     0,   0, 50,   50,    5,   4,  4,  10,  85,   85,   100,  1,   false },
     { "grenade", "Granatone",     S_NULL,    S_NULL,     1000,   650,    200,  0,    20,   6,  1,    1,   1,    3,  1,   0,   0,    0,    0,   3,   false },
     { "pistol",  "Akimbo",       S_PISTOL,  S_RAKIMBO,  1400,   80,     18,   0,     0,   0, 50,   10,   20,   6,  5,   4,  15,   25,   115,  1,   true  },
 };
@@ -550,8 +551,8 @@ const char *rolenames[CR_NUM + 1] = { "unarmed", "master", "admin", "owner", "" 
 
 const char *killmessages[2][NUMGUNS] =
 {
-    { "",        "gabibbed","busted", "picked off", "peppered", "came on", "piselled", "shredded", "",       "busted"},
-    { "slashed", "gabibbed","",       "",           "splattered", "",        "headshot",  "",         "gibbed", "" }
+    { "",        "gabibbed","busted", "picked off", "peppered", "came on", "piselled", "shredded", "gibbed", "",       "busted"},
+    { "slashed", "","",       "",           "splattered", "",        "headshot",  "", "gibbed",          "gibbed", "" }
 };
 
 #define C(x) (1<<(SC_##x))
@@ -578,6 +579,8 @@ soundcfgitem soundcfg[S_NULL] =
     { "weapon/sniper_reload",   "Sniper reloading",         0, 0,  0, S_RSNIPER,                C(WEAPON)        }, // 17
     { "weapon/auto",            "Assault rifle",            0, 0,  0, S_ASSAULT,                C(WEAPON)        }, // 18
     { "weapon/auto_reload",     "Assault rifle reloading",  0, 0,  0, S_RASSAULT,               C(WEAPON)        }, // 19
+    { "weapon/ratzinger",          "Ratzinger",                   0, 0,  0, S_RATZINGER,                 C(WEAPON)        }, //
+    { "weapon/ratzinger_reload",   "Ratzinger reloading",         0, 0,  0, S_RRATZINGER,                C(WEAPON)        }, //
     { "misc/pickup_ammo_clip",  "Ammo pickup",              0, 0,  0, S_ITEMAMMO,               C(PICKUP)        }, // 20
     { "misc/pickup_health",     "Health pickup",            0, 0,  0, S_ITEMHEALTH,             C(PICKUP)        }, // 21
     { "misc/pickup_armour",     "Armour pickup",            0, 0,  0, S_ITEMARMOUR,             C(PICKUP)        }, // 22

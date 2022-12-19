@@ -370,6 +370,7 @@ void drawequipicons(playerent *p)
       case GUN_SNIPER: c=1; r=1; break;
       case GUN_ASSAULT: c=2; r=1; break;
       case GUN_GRENADE: c=3; r=1; break;
+      case GUN_THROWRATZINGER: break;
       case GUN_AKIMBO: c=1; r=0; break;
       default: break;
       }
@@ -378,9 +379,13 @@ void drawequipicons(playerent *p)
       {
       if(p->weaponsel->type != GUN_HAMMER)
         drawequipicon(HUDPOS_WEAPON*2, 1650, c, r);
-      else
+      if(p->weaponsel->type == GUN_HAMMER)
         {
         drawequipicon(HUDPOS_WEAPON*2, 1650, "packages/misc/gabibber.png");
+        }
+      if(p->weaponsel->type == GUN_THROWRATZINGER)
+        {
+        drawequipicon(HUDPOS_WEAPON*2, 1650, "packages/misc/ratzinger.png");
         }
       }
     glEnable(GL_BLEND);

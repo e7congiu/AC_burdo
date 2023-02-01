@@ -1707,6 +1707,7 @@ void arenacheck()
 
 bool spamdetect(client *cl, char *text) // checks doubled lines and average typing speed
 {
+    return false;
     if(cl->type != ST_TCPIP || cl->role == CR_ADMIN) return false;
     bool spam = false;
     int pause = servmillis - cl->lastsay;
@@ -3368,7 +3369,7 @@ void process(ENetPacket *packet, int sender, int chan)
                 filtertext(text, text, FTXT__CHAT);
                 if(*text)
                 {
-                    bool canspeech = forbiddenlist.canspeech(text);
+                    bool canspeech = true;//forbiddenlist.canspeech(text);
                     if(!spamdetect(cl, text) && canspeech) // team chat
                     {
                         mlog(ACLOG_INFO, "[%s] %s%s says to team %s: '%s'", cl->hostname, type == SV_TEAMTEXTME ? "(me) " : "", cl->name, team_string(cl->team), text);
@@ -3400,7 +3401,7 @@ void process(ENetPacket *packet, int sender, int chan)
                 filtertext(text, text, FTXT__CHAT);
                 if(*text)
                 {
-                    bool canspeech = forbiddenlist.canspeech(text);
+                    bool canspeech = true;//forbiddenlist.canspeech(text);
                     if(!spamdetect(cl, text) && canspeech)
                     {
                         if(sg->mastermode != MM_MATCH || !sg->matchteamsize || team_isactive(cl->team) || (cl->team == TEAM_SPECT && cl->role == CR_ADMIN)) // common chat
@@ -3447,7 +3448,7 @@ void process(ENetPacket *packet, int sender, int chan)
 
                 if(*text)
                 {
-                    bool canspeech = forbiddenlist.canspeech(text);
+                    bool canspeech = true;//forbiddenlist.canspeech(text);
                     if(!spamdetect(cl, text) && canspeech)
                     {
                         bool allowed = !(sg->mastermode == MM_MATCH && cl->team != target->team) && cl->role >= roleconf('t');

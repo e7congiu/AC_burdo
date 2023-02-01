@@ -6,7 +6,7 @@
 CUBE_DIR=.
 
 # CUBE_OPTIONS starts AssaultCube with any command line options you choose.
-CUBE_OPTIONS=""
+CUBE_OPTIONS="-mlocalhost"
 
 # Comment this out, to disable reading command line options from config/servercmdline.txt
 # If enabled, any options under CUBE_OPTIONS are superseded by options in servercmdline.txt
@@ -52,6 +52,7 @@ then
 fi
 
 BINARYPATH="${CUBE_DIR}/bin_unix/${SYSTEM_NAME}${MACHINE_NAME}server"
+BINARYPATH="${CUBE_DIR}/bin_unix/gino_server"
 
 if [ "$1" = "--outputbinarypath" ]; then
   echo "${BINARYPATH}"

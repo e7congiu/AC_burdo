@@ -1707,7 +1707,6 @@ void arenacheck()
 
 bool spamdetect(client *cl, char *text) // checks doubled lines and average typing speed
 {
-    return false;
     if(cl->type != ST_TCPIP || cl->role == CR_ADMIN) return false;
     bool spam = false;
     int pause = servmillis - cl->lastsay;
@@ -1727,6 +1726,7 @@ bool spamdetect(client *cl, char *text) // checks doubled lines and average typi
     cl->lastsay = servmillis;
     if(cl->saychars > (SPAMCHARPERMINUTE * SPAMCHARINTERVAL) / 60)
         spam = true;
+    return false;
     return spam;
 }
 
